@@ -39,7 +39,7 @@ const BuilderIOPanel2 = (props) => {
   return (
     <React.Fragment>
         {(builderContentJson || isPreviewing) && (
-          <BuilderComponent model="panel-2" content={builderContentJson} data={builderData} key={props.selectedTaskSid}/>  
+          <BuilderComponent model="panel-2" content={isPreviewing ? null : builderContentJson} data={builderData}/>
           // <BuilderComponent model="panel-2" content={builderContentJson} data={props.data}/>  
         )}
     </React.Fragment>
