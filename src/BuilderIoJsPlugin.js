@@ -4,8 +4,10 @@ import { FlexPlugin } from "@twilio/flex-plugin";
 import BuilderIOPanel2 from "./components/BuilderIOPanel2";
 import TaskAttributes from "./components/sample/TaskAttributes.Component";
 import { CustomizationProvider } from "@twilio-paste/core/customization";
-
+import ConfigurationSideLink from "./components/configuration/ConfigurationSideLink";
+import ConfigurationView from "./components/configuration/ConfigurationView";
 import registerComponentsWithBuilderIO from "./utils/registerComponentsWithBuilderIO";
+import { getLocalStorageValue } from "./utils/localStorage";
 
 const PLUGIN_NAME = "BuilderIoJsPlugin";
 
@@ -31,8 +33,25 @@ export default class BuilderIoJsPlugin extends FlexPlugin {
 			},
 		});
 
+		flex.SideNav.Content.add(<ConfigurationSideLink key="configuration-sidelink" />, {
+			sortOrder: -1,
+			align: "end",
+		});
+
+		flex.ViewCollection.Content.add(
+			<flex.View name="builder-config" key="builder-config">
+				<ConfigurationView key="builder-config" />
+			</flex.View>
+		);
+
+		let builderEnvironmentKey = getLocalStorageValue("builderEnvironmentKey");
+
+		if (!builderEnvironmentKey) {
+			builderEnvironmentKey = process.env.FLEX_BUILDERIO_API_KEY;
+		}
+
 		// initiates builder.io with the api key from the environment variables
-		builder.init("c5310efc89784d769e28606b3fb27442"); // process.env.FLEX_BUILDERIO_API_KEY
+		builder.init(builderEnvironmentKey); // process.env.FLEX_BUILDERIO_API_KEY
 
 		// register a few twilio paste components with builder.io
 		registerComponentsWithBuilderIO();
