@@ -6,7 +6,7 @@ import { AvatarComponent } from "../components/paste/Avatar";
 import { BadgeComponent } from "../components/paste/Badge";
 import { ButtonComponent } from "../components/paste/Button";
 import { ButtonWithIconComponent } from "../components/paste/ButtonWithIcon";
-import { ButtonGroupComponent } from "../components/paste/ButtonGroup";
+// import { ButtonGroupComponent } from "../components/paste/ButtonGroup";
 import { CalloutComponent } from "../components/paste/Callout";
 import { CardComponent } from "../components/paste/Card";
 import { DescriptionListComponent } from "../components/paste/DescriptionList";
@@ -41,7 +41,7 @@ export default function registerComponentsWithBuilderIO() {
 		AnchorComponent,
 		AvatarComponent,
 		BadgeComponent,
-		ButtonGroupComponent,
+		// ButtonGroupComponent,
 		ButtonComponent,
 		ButtonWithIconComponent,
 		CalloutComponent,

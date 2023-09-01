@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BuilderComponent, builder, useIsPreviewing } from "@builder.io/react";
-import { Manager, withTaskContext } from "@twilio/flex-ui";
+import { Actions, Manager, withTaskContext } from "@twilio/flex-ui";
 import { cleanTaskObject, cleanWorkerObject } from "../utils/flexObjectCleaner";
 
 const BuilderIOPanel2 = (props) => {
