@@ -32,6 +32,7 @@ export const BadgeComponent = {
 				name: "as",
 				type: "text",
 				enum: ["span", "button", "a"],
+				advanced: true,
 			},
 		],
 	},

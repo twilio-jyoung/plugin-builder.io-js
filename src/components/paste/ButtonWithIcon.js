@@ -1,9 +1,26 @@
 // command + shift + L to update all instances of word at once
-import { ButtonWithIcon } from "./ButtonWithIcon.Component";
 import iconsJson from "@twilio-paste/icons/json/icons.json";
+import { Button } from "@twilio-paste/core";
+import { IconLoader } from "../../utils/IconLoader";
+
+const component = (props) => {
+	let decorative = props.size !== "icon";
+
+	let title = decorative ? props.text : props.icon;
+
+	return (
+		<Button size={props.size} variant={props.variant}>
+			{(props.icon !== "" || props.icon !== "undefined") && (
+				<IconLoader icon={props.icon} decorative={decorative} title={title} />
+			)}
+
+			{!decorative && <React.Fragment>{props.text}</React.Fragment>}
+		</Button>
+	);
+};
 
 export const ButtonWithIconComponent = {
-	component: ButtonWithIcon,
+	component: component,
 	componentOptions: {
 		name: "Paste Icon Button",
 		image: "https://tabler-icons.io/static/tabler-icons/icons-png/icons.png",
@@ -22,14 +39,13 @@ export const ButtonWithIconComponent = {
 				name: "text",
 				type: "text",
 				defaultValue: "Button",
-				required: true,
 			},
 			{
 				friendlyName: "Button Size",
 				name: "size",
 				type: "text",
-				enum: ["default", "small", "icon", "icon_small", "reset"],
-				defaultValue: "default",
+				enum: ["icon", "icon_small"],
+				defaultValue: "icon",
 				required: true,
 			},
 			{

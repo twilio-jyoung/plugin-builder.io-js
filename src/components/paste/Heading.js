@@ -1,8 +1,13 @@
-// command + shift + L to update all instances of word at once
-import { PasteHeading } from "./Heading.Component";
+import { Heading } from "@twilio-paste/core";
+
+const component = (props) => (
+	<Heading as={props.as} variant={props.variant} marginBottom={props.marginBottom}>
+		{props.text}
+	</Heading>
+);
 
 export const HeadingComponent = {
-	component: PasteHeading,
+	component: component,
 	componentOptions: {
 		name: "Paste Heading",
 		image: "https://tabler-icons.io/static/tabler-icons/icons-png/heading.png",

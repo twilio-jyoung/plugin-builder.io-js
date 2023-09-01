@@ -1,14 +1,20 @@
 import { Builder, withChildren } from "@builder.io/react";
+import configureBuilderUI from "./configureBuilderUI";
 import { AlertComponent } from "../components/paste/Alert";
 import { AnchorComponent } from "../components/paste/Anchor";
 import { AvatarComponent } from "../components/paste/Avatar";
 import { BadgeComponent } from "../components/paste/Badge";
 import { ButtonComponent } from "../components/paste/Button";
 import { ButtonWithIconComponent } from "../components/paste/ButtonWithIcon";
+import { ButtonGroupComponent } from "../components/paste/ButtonGroup";
+import { CalloutComponent } from "../components/paste/Callout";
 import { CardComponent } from "../components/paste/Card";
+import { DescriptionListComponent } from "../components/paste/DescriptionList";
 import { HeadingComponent } from "../components/paste/Heading";
 import { IconComponent } from "../components/paste/Icon";
 import { ParagraphComponent } from "../components/paste/Paragraph";
+import { SeparatorComponent } from "../components/paste/Separator";
+import { StackComponent } from "../components/paste/Stack";
 import { TabsComponent } from "../components/paste/Tabs";
 import { TextComponent } from "../components/paste/Text";
 import { PolarAreaApexChartComponent } from "../components/sample/ApexChart";
@@ -35,12 +41,17 @@ export default function registerComponentsWithBuilderIO() {
 		AnchorComponent,
 		AvatarComponent,
 		BadgeComponent,
+		ButtonGroupComponent,
 		ButtonComponent,
 		ButtonWithIconComponent,
+		CalloutComponent,
 		CardComponent,
+		DescriptionListComponent,
 		HeadingComponent,
 		IconComponent,
 		ParagraphComponent,
+		SeparatorComponent,
+		StackComponent,
 		TabsComponent,
 		TextComponent,
 
@@ -53,23 +64,6 @@ export default function registerComponentsWithBuilderIO() {
 
 	registerListOfComponents(components);
 
-	Builder.register("editor.settings", { customInsertMenu: false });
-
-	Builder.register("insertMenu", {
-		name: "Twilio Paste Components",
-		items: [
-			{ name: "Paste Text" },
-			{ name: "Paste Heading" },
-			{ name: "Paste Paragraph" },
-			{ name: "Paste Anchor" },
-			{ name: "Paste Alert" },
-			{ name: "Paste Badge" },
-			{ name: "Paste Avatar" },
-			{ name: "Paste Button" },
-			{ name: "Paste Icon Button" },
-			{ name: "Paste Card" },
-			{ name: "Paste Icon" },
-			{ name: "Paste Tabs" },
-		],
-	});
+	// configure builder UI to organize components into logical buckets
+	configureBuilderUI(components);
 }

@@ -1,10 +1,20 @@
-// command + shift + L to update all instances of word at once
-import { TextAnchor } from "./Anchor.Component";
+import { Anchor } from "@twilio-paste/core";
 
-// the anchor component does not expose a property for the anchor text
-// therefore created a custom component which wraps anchor and exposes a text property
+const component = (props) => {
+	return (
+		<Anchor
+			href={props.href}
+			showExternal={props.showExternal}
+			target={props.target}
+			variant={props.variant}
+		>
+			{props.text}
+		</Anchor>
+	);
+};
+
 export const AnchorComponent = {
-	component: TextAnchor,
+	component: component,
 	componentOptions: {
 		name: "Paste Anchor",
 		image: "https://tabler-icons.io/static/tabler-icons/icons-png/link.png",

@@ -1,5 +1,5 @@
 import { Card } from "@twilio-paste/core";
-import { spacings } from "@twilio-paste/design-tokens";
+import { spacingSizes } from "../../utils/designTokenHelper";
 
 export const CardComponent = {
 	component: Card,
@@ -19,12 +19,7 @@ export const CardComponent = {
 				friendlyName: "Padding",
 				name: "padding",
 				type: "text",
-				enum: Object.keys(spacings).sort(function (a, b) {
-					return a.localeCompare(b, undefined, {
-						numeric: true,
-						sensitivity: "base",
-					});
-				}),
+				enum: spacingSizes,
 				defaultValue: "space60",
 			},
 		],

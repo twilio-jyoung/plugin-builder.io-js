@@ -10,8 +10,7 @@ export const IconComponent = {
 	component: IconLoader,
 	componentOptions: {
 		name: "Paste Icon",
-		image:
-			"https://tabler-icons.io/static/tabler-icons/icons-png/circle-letter-i.png",
+		image: "https://tabler-icons.io/static/tabler-icons/icons-png/circle-letter-i.png",
 		docsLink: "https://paste.twilio.design/components/icons",
 		inputs: [
 			{
@@ -42,6 +41,7 @@ export const IconComponent = {
 				enum: ["span", "div", "label"],
 				defaultValue: "span",
 				required: true,
+				advanced: true,
 			},
 			{
 				friendlyName: "Display",

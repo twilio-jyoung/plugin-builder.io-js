@@ -1,15 +1,30 @@
-// command + shift + L to update all instances of word at once
-import { PasteText } from "./Text.Component";
-import { fontSizes, fontWeights, lineHeights, spacings } from "@twilio-paste/design-tokens";
-import sortOptionNames from "../../utils/designTokenHelper";
+import { fontSizes, fontWeights, lineHeights } from "@twilio-paste/design-tokens";
+import sortOptionNames, { spacingSizes } from "../../utils/designTokenHelper";
+import { Text } from "@twilio-paste/core";
+
+const component = (props) => {
+	return (
+		<Text
+			as={props.as}
+			color={props.color}
+			fontFamily={props.fontFamily}
+			fontSize={props.fontSize}
+			fontWeight={props.fontWeight}
+			lineHeight={props.lineHeight}
+			margin={props.margin}
+			padding={props.padding}
+		>
+			{props.text}
+		</Text>
+	);
+};
 
 let fontSizesSorted = sortOptionNames(fontSizes);
 let fontWeightsSorted = sortOptionNames(fontWeights);
 let lineHeightsSorted = sortOptionNames(lineHeights);
-let spacingsSorted = sortOptionNames(spacings);
 
 export const TextComponent = {
-	component: PasteText,
+	component: component,
 	componentOptions: {
 		// the text component does not expose a property for the actual text?
 		// therefore created a custom component which wraps text and exposes a text property
@@ -32,6 +47,7 @@ export const TextComponent = {
 				enum: ["span", "div", "label"],
 				defaultValue: "span",
 				required: true,
+				advanced: true,
 			},
 			{
 				friendlyName: "Display",
@@ -40,6 +56,7 @@ export const TextComponent = {
 				enum: ["block", "inline-block"],
 				defaultValue: "block",
 				required: true,
+				advanced: true,
 			},
 			{
 				friendlyName: "Color",
@@ -73,14 +90,14 @@ export const TextComponent = {
 				friendlyName: "Margin",
 				name: "margin",
 				type: "text",
-				enum: spacingsSorted,
+				enum: spacingSizes,
 				defaultValue: "space0",
 			},
 			{
 				friendlyName: "Padding",
 				name: "padding",
 				type: "text",
-				enum: spacingsSorted,
+				enum: spacingSizes,
 				defaultValue: "space0",
 			},
 		],
