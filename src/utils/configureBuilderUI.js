@@ -18,24 +18,30 @@ export default function configureBuilderUI(components) {
 	});
 
 	// i want paste components to be added in a specific order
-	// but if we forget to add a new paste component to the ordered list, it wont be displayed, which would be bad
+	// but if we forget to add a new paste component to the ordered list, it wont be displayed in this bucket, which would be bad
 	let orderedPasteComponents = [
+		// txt
 		{ name: "Paste Text" },
 		{ name: "Paste Heading" },
 		{ name: "Paste Paragraph" },
-		{ name: "Paste Description List" },
-		{ name: "Paste Separator" },
-		{ name: "Paste Stack" },
+		// txt2
 		{ name: "Paste Anchor" },
+		{ name: "Paste Badge" },
+		{ name: "Paste Separator" },
+		// advanced txt
 		{ name: "Paste Alert" },
 		{ name: "Paste Callout" },
-		{ name: "Paste Badge" },
-		{ name: "Paste Avatar" },
-		{ name: "Paste Button" },
-		{ name: "Paste Icon Button" },
+		{ name: "Paste Description List" },
+		// containers
 		{ name: "Paste Card" },
-		{ name: "Paste Icon" },
 		{ name: "Paste Tabs" },
+		{ name: "Paste Stack" },
+		// icons / images
+		{ name: "Paste Button" },
+		{ name: "Paste Icon" },
+		{ name: "Paste Avatar" },
+		//
+		{ name: "Paste Icon Button" },
 	];
 
 	// to get around this, we need to do a series of annoying steps.
