@@ -19,7 +19,6 @@ import { TabsComponent } from "../components/paste/Tabs";
 import { TextComponent } from "../components/paste/Text";
 import { PolarAreaApexChartComponent } from "../components/sample/ApexChart";
 import { ChromeDinoGameComponent } from "../components/sample/ChromeDinoGame";
-import { CustomerCardComponent } from "../components/sample/CustomerCard";
 import { TaskAttributesComponent } from "../components/sample/TaskAttributes";
 
 function registerListOfComponents(customComponents) {
@@ -58,7 +57,6 @@ export default function registerComponentsWithBuilderIO() {
 		// custom components
 		PolarAreaApexChartComponent,
 		ChromeDinoGameComponent,
-		CustomerCardComponent,
 		TaskAttributesComponent,
 	];
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BuilderComponent, builder, useIsPreviewing } from "@builder.io/react";
-import { Actions, Manager, withTaskContext } from "@twilio/flex-ui";
+import { Manager, withTaskContext } from "@twilio/flex-ui";
 import { cleanTaskObject, cleanWorkerObject } from "../utils/flexObjectCleaner";
 
 const BuilderIOPanel2 = (props) => {
@@ -19,7 +19,8 @@ const BuilderIOPanel2 = (props) => {
 				cachebust: true,
 				cacheSeconds: 60,
 				userAttributes: {
-					demo: "se-poc",
+					// set attributes that builder.io should use for targeting
+					// this can be data from the task attributes, worker attributes, or hardcoded values
 				},
 			})
 			.toPromise()

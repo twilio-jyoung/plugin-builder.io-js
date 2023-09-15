@@ -1,31 +1,285 @@
-# Your custom Twilio Flex Plugin
+# [Twilio Flex] + [builder.io] = ❤️
 
-Twilio Flex Plugins allow you to customize the appearance and behavior of [Twilio Flex](https://www.twilio.com/flex). If you want to learn more about the capabilities and how to use the API, check out our [Flex documentation](https://www.twilio.com/docs/flex).
+## Table of Contents
 
-## Setup
+- [What is builder.io?](#what-is-builder.io)
+- [How does that help me in Twilio Flex?](#how-does-that-help-me-in-twilio-flex)
+- [Installation](#installation)
+- [Explain how this works](#explain-how-this-works)
+  - [Give Control of Panel2 to builder.io](#give-control-of-panel2-to-builder.io)
+  - [Send data from Flex into builder.io](#send-data-from-flex-into-builder.io)
+  - [Trigger Actions from builder.io into Flex](#trigger-actions-from-builder.io-into-flex)
+  - [Register a custom component](#register-a-custom-component)
+  - [Custom Component Configuration](#custom-component-configuration)
+  - [Programmatically set bindings](#programmatically-set-bindings)
 
-Make sure you have [Node.js](https://nodejs.org) as well as [`npm`](https://npmjs.com). We support Node >= 10.12 (and recommend the _even_ versions of Node). Afterwards, install the dependencies by running `npm install`:
+What if building in Flex was as easy as drag-and-drop? Now it can be with [builder.io]!
+
+## What is builder.io?
+
+[builder.io] is a [highly performant](https://www.builder.io/blog/high-performance-no-code) Visual CMS that lets you edit web content using a highly customizable drag-and-drop editor.  
+![builder.io GIF](https://user-images.githubusercontent.com/844291/186968488-6344adaa-38bb-422c-b728-10c529af993d.gif)
+
+There's a whole write-up on the technical details of how this solution works [here](https://www.builder.io/c/docs/how-builder-works-technical).
+
+## How does that help me in Twilio Flex?
+
+[builder.io] allows you to rapidly build, layout, and prototype in the Flex UI. You can assemble Panel2 at warp speed using pre-built components or your own new custom components.
+
+Here's a quick demo of this in action:
+![builder.io flex preview](https://i.ibb.co/0m2HRxz/no-task-build.gif)
+
+[builder.io] also supports targetting based on attributes of the user logged into Flex, or attributes about the Task that they are working on allows you to build different UX experiences for different groups of users, or based on the type of task which they are currently handling.
+
+### Benefits for developers:
+
+- stop thinking about component layout and focus on functionality
+- dont have to re-invent the wheel
+- display and arrange content from APIs and task attributes in the UX in seconds
+- see UX changes in real-time, publish when it's good to go
+
+### Benefits for non-developers
+
+- compose custom demos without developers in an easy to use drag-and-drop UI
+- build high-quality reuable layouts which can be called upon at any time
+- pick from a library of components available to you which have pre-built and configurable functionality
+
+## Installation
+
+Prerequisites
+
+- Create a [builder.io] account
+- Navigate to [models](https://builder.io/models) and create a new section model with the name `Panel 2` and set the Preview URL to [http://localhost:3000/agent-desktop](http://localhost:3000/agent-desktop)
+- you are running node v16 or above
+- twilio cli 5.2.0 or above is [installed](https://www.twilio.com/docs/twilio-cli/getting-started/install) (`twilio --version`)
+- twilio flex plugins 6.0.2 or above is [installed](https://www.twilio.com/docs/flex/developer/plugins/cli/install#install-the-flex-plugins-cli) (`twilio plugins`, `twilio plugins:install @twilio-labs/plugin-flex@latest`)
+- twilio serverless plugin 3.0.4 or above is [installed](https://www.twilio.com/docs/labs/serverless-toolkit/getting-started#install-the-twilio-serverless-toolkit) (`twilio plugins`, `twilio plugins:install @twilio-labs/plugin-serverless@latest`)
+- `twilio profiles:list` has an active account set.
+- have the twilio auth token for your account ready
+
+Setup
+
+- clone the repo
+- open terminal and cd to the directory you put your plugin in
+- execute the following commands
 
 ```bash
-cd 
+cp public/appConfig.example.js public/appConfig.js
+```
 
-# If you use npm
+```bash
+cp .env.sample .env
+```
+
+- add your API key to [builder.io] in your .env file which can be found on the [Get started](https://builder.io/app/get-started) page or your [Account Settings](https://builder.io/account)
+
+```bash
 npm install
 ```
 
-Next, please install the [Twilio CLI](https://www.twilio.com/docs/twilio-cli/quickstart) by running:
-
 ```bash
-brew tap twilio/brew && brew install twilio
+npm install @twilio-paste/core@latest @twilio-paste/icons@latest --legacy-peer-deps
 ```
 
-Finally, install the [Flex Plugin extension](https://github.com/twilio-labs/plugin-flex/tree/v1-beta) for the Twilio CLI:
-
 ```bash
-twilio plugins:install @twilio-labs/plugin-flex
+twilio flex:plugins:start
 ```
 
-## Development
+- Navigate to the [builder.io content](https://builder.io/content) page
+- Click the `Create Your First Entry` button, and select that you want to build a new Panel 2 content item
+- If everything worked correctly you should see an `+ Add Block` button on the right that you can use to add page content. You can use components from [builder.io], but also check out the `Custom Components` section which allows you to insert a subset of components from the [Paste Library](https://paste.twilio.design/) which will match in theme and style with the rest of the Flex UI.
+- For any additional details on how to build with builder.io, check out the getting started guide on the [builder.io docs](https://www.builder.io/c/docs/learning)
 
-Run `twilio flex:plugins:start` to run locally, or `twilio flex:plugins:start` to see all the commands we currently support. For further details on Flex Plugins refer to our documentation on the [Twilio Docs](https://www.twilio.com/docs/flex/developer/plugins/cli) page.
+## Explain how this works
 
+### Give Control of Panel2 to builder.io
+
+In your main plugin file, there are few key things that happen.
+
+- We init the builder.io SDK with an API key that you can find in their console.
+- We optionally set attributes which can be used to alter content seen by the agent. You would use this method for metadata that is not task specific such as looking at properties of the logged in worker to enable or disable part of the UI.
+- We call a helper utility which loads a number of components from the [Paste Library](https://paste.twilio.design/) so that you can get started very quickly.
+- We replace the default content in Panel2 with the builder.io component
+
+> abbreviated for clarity
+
+```jsx
+	async init(flex, manager) {
+		// initiates builder.io with the api key
+		builder.init("builder.io public api key");
+
+		// register a few twilio paste components with builder.io
+		registerComponentsWithBuilderIO();
+
+		// replaces the panel 2 content with the builder.io component
+		flex.AgentDesktopView.Panel2.Content.replace(<BuilderIOPanel2 key="builder-io-panel2" />);
+    }
+```
+
+Much of the magic will now happen in the component that we now use for Panel2.
+
+> abbreviated for clarify
+
+```jsx
+const BuilderIOPanel2 = (props) => {
+	const [builderContentJson, setBuilderContentJson] = useState();
+	const isPreviewing = useIsPreviewing();
+
+	useEffect(() => {
+		builder
+			.get("panel-2", {
+				url: location.pathname,
+				cachebust: true,
+				cacheSeconds: 60,
+				userAttributes: {
+					// set attributes that builder.io should use for targeting
+					// this can be data from the task attributes, worker attributes, or hardcoded values
+					demo: "panel-2",
+				},
+			})
+			.toPromise()
+			.then((content) => setBuilderContentJson(content));
+	}, []);
+
+	return (
+		<React.Fragment>
+			{builderContentJson && (
+				<BuilderComponent
+					model="panel-2"
+					content={isPreviewing ? null : builderContentJson}
+					data={data}
+					context={{
+						invokeAction: async (action, payload) => {
+							console.log(`${action} Action invoked from builder.io with payload:`, payload);
+							await Actions.invokeAction(action, payload);
+						},
+					}}
+				/>
+			)}
+		</React.Fragment>
+	);
+};
+```
+
+In the BuilderComponent props, some really important things happen.
+
+- [model](https://www.builder.io/c/docs/models-sections): we specify the name of the section model which should be rendered in panel2 when flex loads
+- content: builder uses the JSON representation of your content for that model that it fetches in the useEffect hook
+- [context](https://github.com/BuilderIO/builder/tree/main/packages/react#passing-data-and-functions-down): we tell builder about any data or callbacks we want to make available. this allows us to invoke code in flex through events generated in the builder.io UI.
+- [data](https://github.com/BuilderIO/builder/tree/main/packages/react#passing-data-and-functions-down): we pass all of the theme and task context to builder (set in props by withTheme and withTaskContext respectively)
+
+This allows us to build bi-directional data flow.
+
+### Send data from Flex into builder.io
+
+[builder.io] will now have access to all task, theme, and more saved in the [state](https://github.com/BuilderIO/builder/tree/main/packages/react#passing-data-and-functions-down) object. You can now create text in panel2 and bind the text to `state.task.attributes.someproperty`, or simply use the binding drop down to select any attribute available from the task or theme.
+
+### Trigger Actions from builder.io into Flex
+
+[builder.io] can create events that call functions passed in the context parameter. For more details on how this works, see [here](https://www.builder.io/c/docs/react/custom-actions).
+
+For a practical example, lets assume we wanted to create a button in [builder.io] that allowed us to click to call. We know that we need to use the [StartOutboundCall](https://www.twilio.com/docs/flex/developer/voice/dialpad-click-to-dial#the-outbound-call-action-2) Action from Flex to initiate the call. In [builder.io] we can add an event listener for a click event on our button and execute the following custom code:
+
+```javascript
+context.invokeAction("StartOutboundCall", {
+	destination: state.task.attributes.customers.phone,
+});
+```
+
+<mark>please note: flex does not allow you to have multiple open windows when making an outbound call. you'll need to publish your changes and then navigate away from the builder content entry preview page before you test this functionality.</mark>
+
+### Register a custom component
+
+If you have already built a component...
+
+`components/Greeting.jsx`
+
+```jsx
+import React from "react";
+import { Builder } from "@builder.io/react";
+
+export const Greeting = () => (
+	const greeting = 'Hello Function Component!';
+	return <h1>{greeting}</h1>;
+);
+```
+
+then you can register it with [builder.io] using a single line of code.
+
+`utils/builderio-component-factory.js`
+
+```jsx
+import React from "react";
+import { Builder } from "@builder.io/react";
+import { Greeting } from "../components/Greeting";
+
+export default function createBuilderIOComponents() {
+	Builder.registerComponent(Greeting, { name: "My Greeting Component" });
+}
+```
+
+### Custom Component Configuration
+
+When you create custom components, you can also specify configurable inputs that can be set using the [builder.io] UI. The list of input types can be found [here](https://www.builder.io/c/docs/custom-components-input-types). You can specify any number of inputs, as well as the type of input (text, boolean, color, date, etc...). For instance, let's assume you wanted register the [paste alert](https://paste.twilio.design/components/alert) as a custom component, but you wanted to be able to set the alert text, and the [variant](https://paste.twilio.design/components/button#examples) in the [builder.io] UI, you could register the component like this:
+
+```jsx
+import { Alert } from "@twilio-paste/core";
+
+export const AlertComponent = {
+	component: Alert,
+	componentOptions: {
+		name: "Paste Alert",
+		image: "https://tabler-icons.io/static/tabler-icons/icons-png/exclamation-mark.png",
+		docsLink: "https://paste.twilio.design/components/alert",
+		inputs: [
+			{
+				friendlyName: "Alert Message",
+				name: "children",
+				type: "text",
+				defaultValue: "this is default alert text",
+				required: true,
+			},
+			{
+				friendlyName: "Variant",
+				name: "variant",
+				type: "text",
+				enum: ["neutral", "warning", "error"],
+				defaultValue: "neutral",
+				required: true,
+			},
+		],
+	},
+};
+```
+
+Now when you wanted to use this alert in the [builder.io] UI, you will have configurable options to set the text string for the alert text, and a drop down menu of the various variants available.
+![builder.io config](https://i.postimg.cc/sDMCCgCG/Screenshot-2023-02-08-at-3-53-17-PM.png)
+
+### Programmatically set bindings
+
+Setting configuration in the UI is nice, but you may want some options to be set by default and not through the UI. You can programmatically set bindings on custom components so you can apply multiple bindings simultaneously. This is helpful when, for example, applying styles from an existing design system.
+
+```jsx
+export const CardComponent = {
+	component: Card,
+	componentOptions: {
+		name: "Paste Card",
+		...
+		defaults: {
+			bindings: {
+				"style.background": "state.theme.tokens.backgroundColors.colorBackground",
+				"style.borderColor": "state.theme.tokens.borderColors.colorBorder",
+				"style.color": "state.theme.tokens.textColors.colorText",
+			},
+		},
+	},
+};
+```
+
+[//]: # "These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax"
+[twilio flex]: https://www.twilio.com/flex
+[builder.io]: https://builder.io
+
+## Closing
+
+We hope that you find this repo as valuable as we did. This tool has made us even more efficient at building high quality UX in the Flex UI!

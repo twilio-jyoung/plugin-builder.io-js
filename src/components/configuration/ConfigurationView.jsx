@@ -1,10 +1,4 @@
-import {
-	Form,
-	FormSection,
-	FormSectionHeading,
-	FormControl,
-	FormActions,
-} from "@twilio-paste/core/form";
+import { Form, FormControl, FormActions } from "@twilio-paste/core/form";
 import { Input } from "@twilio-paste/core/input";
 import { Label } from "@twilio-paste/core/label";
 import { Button } from "@twilio-paste/core/button";
@@ -41,7 +35,7 @@ const ConfigurationView = () => {
 				</FormControl>
 				<FormActions>
 					<Button variant="primary" onClick={handleSubmit} type="submit">
-						Submit
+						Update
 					</Button>
 					<Button variant="secondary" onClick={handleCancel}>
 						Cancel

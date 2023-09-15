@@ -1,6 +1,4 @@
-// command + shift + L to update all instances of word at once
-import ChromeDinoGame from 'react-chrome-dino';
-
+import ChromeDinoGame from "react-chrome-dino";
 
 export const ChromeDinoGameComponent = {
 	component: ChromeDinoGame,
