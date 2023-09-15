@@ -74,11 +74,11 @@ cp .env.sample .env
 - add your API key to [builder.io] in your .env file which can be found on the [Get started](https://builder.io/app/get-started) page or your [Account Settings](https://builder.io/account)
 
 ```bash
-npm install
+npm install @twilio-paste/core@17.7.0 @twilio-paste/icons@9.4.3 --legacy-peer-deps
 ```
 
 ```bash
-npm install @twilio-paste/core@latest @twilio-paste/icons@latest --legacy-peer-deps
+npm install
 ```
 
 ```bash
