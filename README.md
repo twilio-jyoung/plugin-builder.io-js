@@ -190,32 +190,12 @@ context.invokeAction("StartOutboundCall", {
 
 ### Register a custom component
 
-If you have already built a component...
-
-`components/Greeting.jsx`
+If you have already built a component, then you can register it with [builder.io] using a single line of code.
 
 ```jsx
-import React from "react";
 import { Builder } from "@builder.io/react";
 
-export const Greeting = () => (
-	const greeting = 'Hello Function Component!';
-	return <h1>{greeting}</h1>;
-);
-```
-
-then you can register it with [builder.io] using a single line of code.
-
-`utils/builderio-component-factory.js`
-
-```jsx
-import React from "react";
-import { Builder } from "@builder.io/react";
-import { Greeting } from "../components/Greeting";
-
-export default function createBuilderIOComponents() {
-	Builder.registerComponent(Greeting, { name: "My Greeting Component" });
-}
+Builder.registerComponent(MyCustomComponent, { name: "My Custom Component" });
 ```
 
 ### Custom Component Configuration
