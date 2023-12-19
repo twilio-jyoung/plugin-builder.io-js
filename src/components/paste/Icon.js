@@ -10,7 +10,8 @@ export const IconComponent = {
 	component: IconLoader,
 	componentOptions: {
 		name: "Paste Icon",
-		image: "https://tabler-icons.io/static/tabler-icons/icons-png/circle-letter-i.png",
+		image:
+			"https://raw.githubusercontent.com/tabler/tabler-icons/ffed949675ec8b825e7a6eaa45166a83bc6f8ff8/packages/icons/icons/circle-letter-i.svg",
 		docsLink: "https://paste.twilio.design/components/icons",
 		inputs: [
 			{

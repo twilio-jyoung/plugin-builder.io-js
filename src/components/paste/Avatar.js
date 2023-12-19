@@ -6,7 +6,7 @@ export const AvatarComponent = {
 	componentOptions: {
 		name: "Paste Avatar",
 		image:
-			"https://tabler-icons.io/static/tabler-icons/icons-png/user-circle.png",
+			"https://raw.githubusercontent.com/tabler/tabler-icons/ffed949675ec8b825e7a6eaa45166a83bc6f8ff8/packages/icons/icons/user-circle.svg",
 		docsLink: "https://paste.twilio.design/components/avatar",
 		inputs: [
 			{
@@ -45,13 +45,7 @@ export const AvatarComponent = {
 				friendlyName: "Color",
 				name: "color",
 				type: "text",
-				enum: [
-					"default",
-					"decorative10",
-					"decorative20",
-					"decorative30",
-					"decorative40",
-				],
+				enum: ["default", "decorative10", "decorative20", "decorative30", "decorative40"],
 				defaultValue: "default",
 			},
 		],

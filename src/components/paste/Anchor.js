@@ -17,7 +17,8 @@ export const AnchorComponent = {
 	component: component,
 	componentOptions: {
 		name: "Paste Anchor",
-		image: "https://tabler-icons.io/static/tabler-icons/icons-png/link.png",
+		image:
+			"https://raw.githubusercontent.com/tabler/tabler-icons/ffed949675ec8b825e7a6eaa45166a83bc6f8ff8/packages/icons/icons/link.svg",
 		docsLink: "https://paste.twilio.design/components/anchor",
 		canHaveChildren: true,
 		inputs: [

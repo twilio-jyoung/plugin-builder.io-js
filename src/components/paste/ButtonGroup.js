@@ -22,7 +22,8 @@ export const ButtonGroupComponent = {
 	component: component,
 	componentOptions: {
 		name: "Paste Button Group",
-		image: "https://tabler-icons.io/static/tabler-icons/icons-png/apps.png",
+		image:
+			"https://raw.githubusercontent.com/tabler/tabler-icons/ffed949675ec8b825e7a6eaa45166a83bc6f8ff8/packages/icons/icons/apps.svg",
 		docsLink: "https://paste.twilio.design/components/button-group",
 		canHaveChildren: true,
 		childRequirements: {

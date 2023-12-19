@@ -15,7 +15,8 @@ export const ButtonComponent = {
 	component: Button,
 	componentOptions: {
 		name: "Paste Button",
-		image: "https://tabler-icons.io/static/tabler-icons/icons-png/rectangle.png",
+		image:
+			"https://raw.githubusercontent.com/tabler/tabler-icons/ffed949675ec8b825e7a6eaa45166a83bc6f8ff8/packages/icons/icons/rectangle.svg",
 		docsLink: "https://paste.twilio.design/components/button",
 		// buttongroup issue resolved by adding this, but creates another problem.  see buttongroup.js for more info
 		// noWrap: true,

@@ -52,7 +52,8 @@ export const DescriptionListComponent = {
 	component: component,
 	componentOptions: {
 		name: "Paste Description List",
-		image: "https://tabler-icons.io/static/tabler-icons/icons-png/list-details.png",
+		image:
+			"https://raw.githubusercontent.com/tabler/tabler-icons/ffed949675ec8b825e7a6eaa45166a83bc6f8ff8/packages/icons/icons/list-details.svg",
 		docsLink: "https://paste.twilio.design/components/description-list",
 		inputs: [
 			{

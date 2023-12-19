@@ -5,7 +5,8 @@ export const CardComponent = {
 	component: Card,
 	componentOptions: {
 		name: "Paste Card",
-		image: "https://tabler-icons.io/static/tabler-icons/icons-png/layout-cards.png",
+		image:
+			"https://raw.githubusercontent.com/tabler/tabler-icons/ffed949675ec8b825e7a6eaa45166a83bc6f8ff8/packages/icons/icons/layout-cards.svg",
 		docsLink: "https://paste.twilio.design/components/card",
 		canHaveChildren: true,
 		inputs: [

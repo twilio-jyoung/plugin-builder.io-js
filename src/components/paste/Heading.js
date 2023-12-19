@@ -10,7 +10,8 @@ export const HeadingComponent = {
 	component: component,
 	componentOptions: {
 		name: "Paste Heading",
-		image: "https://tabler-icons.io/static/tabler-icons/icons-png/heading.png",
+		image:
+			"https://raw.githubusercontent.com/tabler/tabler-icons/ffed949675ec8b825e7a6eaa45166a83bc6f8ff8/packages/icons/icons/heading.svg",
 		docsLink: "",
 		inputs: [
 			{

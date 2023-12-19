@@ -5,7 +5,8 @@ export const ParagraphComponent = {
 	component: Paragraph,
 	componentOptions: {
 		name: "Paste Paragraph",
-		image: "https://tabler-icons.io/static/tabler-icons/icons-png/typography.png",
+		image:
+			"https://raw.githubusercontent.com/tabler/tabler-icons/ffed949675ec8b825e7a6eaa45166a83bc6f8ff8/packages/icons/icons/typography.svg",
 		docsLink: "https://paste.twilio.design/primitives/text",
 		inputs: [
 			{

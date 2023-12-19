@@ -13,7 +13,8 @@ export const CalloutComponent = {
 	component: component,
 	componentOptions: {
 		name: "Paste Callout",
-		image: "https://tabler-icons.io/static/tabler-icons/icons-png/rectangle.png",
+		image:
+			"https://raw.githubusercontent.com/tabler/tabler-icons/ffed949675ec8b825e7a6eaa45166a83bc6f8ff8/packages/icons/icons/rectangle.svg",
 		docsLink: "https://paste.twilio.design/components/button",
 		inputs: [
 			{

@@ -29,7 +29,8 @@ export const TextComponent = {
 		// the text component does not expose a property for the actual text?
 		// therefore created a custom component which wraps text and exposes a text property
 		name: "Paste Text",
-		image: "https://tabler-icons.io/static/tabler-icons/icons-png/typography.png",
+		image:
+			"https://raw.githubusercontent.com/tabler/tabler-icons/ffed949675ec8b825e7a6eaa45166a83bc6f8ff8/packages/icons/icons/typography.svg",
 		docsLink: "https://paste.twilio.design/primitives/text",
 		inputs: [
 			{

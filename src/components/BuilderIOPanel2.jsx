@@ -21,6 +21,7 @@ const BuilderIOPanel2 = (props) => {
 				userAttributes: {
 					// set attributes that builder.io should use for targeting
 					// this can be data from the task attributes, worker attributes, or hardcoded values
+					demo: "se-poc",
 				},
 			})
 			.toPromise()
