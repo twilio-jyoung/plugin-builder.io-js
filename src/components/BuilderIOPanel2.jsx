@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { BuilderComponent, builder, useIsPreviewing } from "@builder.io/react";
 import { Manager, withTaskContext } from "@twilio/flex-ui";
 import { cleanTaskObject, cleanWorkerObject } from "../utils/flexObjectCleaner";
+import { NoTasks } from "./views/NoTasks";
+import { SelectATask } from "./views/SelectATask";
 
 const BuilderIOPanel2 = (props) => {
 	const [builderContentJson, setBuilderContentJson] = useState();
@@ -60,6 +62,14 @@ const BuilderIOPanel2 = (props) => {
 
 		// pass a cleaned up copy of worker data
 		data.worker = worker;
+
+		// to simplify builder development, create static screens which will be rendered in panel2 when there are no tasks or no selected task
+		if (props.tasks?.size === undefined || props.tasks.size === 0) {
+			return <NoTasks />;
+		}
+		if (props.tasks.size > 0 && !props.selectedTaskSid) {
+			return <SelectATask />;
+		}
 
 		return (
 			<React.Fragment>
