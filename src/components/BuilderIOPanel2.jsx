@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { BuilderComponent, builder, useIsPreviewing } from "@builder.io/react";
-import { Manager, withTaskContext } from "@twilio/flex-ui";
+import { Manager, withTaskContext, Actions } from "@twilio/flex-ui";
 import { cleanTaskObject, cleanWorkerObject } from "../utils/flexObjectCleaner";
+import { getLocalStorageValue } from "../utils/localStorage";
 import { NoTasks } from "./views/NoTasks";
 import { SelectATask } from "./views/SelectATask";
 
@@ -15,8 +16,14 @@ const BuilderIOPanel2 = (props) => {
 
 	//#region useEffect hooks
 	useEffect(() => {
+		let builderModelUniqueIdentifier = getLocalStorageValue("builderModelUniqueIdentifier");
+
+		if (!builderModelUniqueIdentifier) {
+			builderEnvironmentKey = process.env.FLEX_BUILDERIO_MODEL_UNIQUE_IDENTIFIER;
+		}
+
 		builder
-			.get("panel-2", {
+			.get(builderModelUniqueIdentifier, {
 				url: location.pathname,
 				cachebust: true,
 				cacheSeconds: 60,

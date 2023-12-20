@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Tab, TabList, Tabs } from "@twilio-paste/core";
+import { Card, Tab, TabList, Tabs } from "@twilio-paste/core";
 import { BuilderBlocks } from "@builder.io/react";
 
 const component = (props) => {

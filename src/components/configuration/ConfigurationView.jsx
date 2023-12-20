@@ -7,8 +7,13 @@ import { Actions } from "@twilio/flex-ui";
 
 const handleSubmit = (event) => {
 	event.preventDefault();
-	let value = document.getElementById("builder-environment-key").value;
-	setLocalStorageValue("builderEnvironmentKey", value);
+
+	let environmentKeyValue = document.getElementById("builder-environment-key").value;
+	setLocalStorageValue("builderEnvironmentKey", environmentKeyValue);
+
+	let modelUniqueIdentifierValue = document.getElementById("builder-model-unique-identifier").value;
+	setLocalStorageValue("builderModelUniqueIdentifier", modelUniqueIdentifierValue);
+
 	window.location.reload();
 };
 
@@ -20,10 +25,16 @@ const handleCancel = (event) => {
 };
 
 const ConfigurationView = () => {
-	let defaultValue = getLocalStorageValue("builderEnvironmentKey");
+	let environmentKeyDefaultValue = getLocalStorageValue("builderEnvironmentKey");
 
-	if (!defaultValue) {
-		defaultValue = process.env.FLEX_BUILDERIO_API_KEY;
+	if (!environmentKeyDefaultValue) {
+		environmentKeyDefaultValue = process.env.FLEX_BUILDERIO_API_KEY;
+	}
+
+	let modelUniqueIdentifierDefaultValue = getLocalStorageValue("builderModelUniqueIdentifier");
+
+	if (!modelUniqueIdentifierDefaultValue) {
+		modelUniqueIdentifierDefaultValue = process.env.FLEX_BUILDERIO_MODEL_UNIQUE_IDENTIFIER;
 	}
 
 	return (
@@ -31,7 +42,18 @@ const ConfigurationView = () => {
 			<Form action="">
 				<FormControl>
 					<Label htmlFor="builder-environment-key">Builder Environment Key</Label>
-					<Input id="builder-environment-key" type="text" defaultValue={defaultValue} />
+					<Input
+						id="builder-environment-key"
+						type="text"
+						defaultValue={environmentKeyDefaultValue}
+					/>
+					<br />
+					<Label htmlFor="builder-model-unique-identifier">Builder Model Unique Identifier</Label>
+					<Input
+						id="builder-model-unique-identifier"
+						type="text"
+						defaultValue={modelUniqueIdentifierDefaultValue}
+					/>
 				</FormControl>
 				<FormActions>
 					<Button variant="primary" onClick={handleSubmit} type="submit">
