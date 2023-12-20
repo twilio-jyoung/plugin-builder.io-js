@@ -50,9 +50,9 @@ Prerequisites
 
 - Create a [builder.io] account
 - Navigate to [models](https://builder.io/models) and create a new section model with the name `Panel 2` and set the Preview URL to [http://localhost:3000/agent-desktop](http://localhost:3000/agent-desktop)
-- you are running node v16 or above
-- twilio cli 5.2.0 or above is [installed](https://www.twilio.com/docs/twilio-cli/getting-started/install) (`twilio --version`)
-- twilio flex plugins 6.0.2 or above is [installed](https://www.twilio.com/docs/flex/developer/plugins/cli/install#install-the-flex-plugins-cli) (`twilio plugins`, `twilio plugins:install @twilio-labs/plugin-flex@latest`)
+- you are running node v16
+- twilio cli 5.11.0 [installed](https://www.twilio.com/docs/twilio-cli/getting-started/install) (`twilio --version`)
+- twilio flex plugins 6.1.2 or above is [installed](https://www.twilio.com/docs/flex/developer/plugins/cli/install#install-the-flex-plugins-cli) (`twilio plugins`, `twilio plugins:install @twilio-labs/plugin-flex@latest`)
 - twilio serverless plugin 3.0.4 or above is [installed](https://www.twilio.com/docs/labs/serverless-toolkit/getting-started#install-the-twilio-serverless-toolkit) (`twilio plugins`, `twilio plugins:install @twilio-labs/plugin-serverless@latest`)
 - `twilio profiles:list` has an active account set.
 - have the twilio auth token for your account ready
