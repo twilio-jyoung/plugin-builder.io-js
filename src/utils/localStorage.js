@@ -3,7 +3,10 @@
 
 export const getLocalStorageValue = (variable_name) => {
 	var lsValue = localStorage.getItem(variable_name);
-	return lsValue || "";
+
+	if (!lsValue || lsValue == "") lsValue = null;
+
+	return lsValue;
 };
 
 export const setLocalStorageValue = (variable_name, variable_value) => {

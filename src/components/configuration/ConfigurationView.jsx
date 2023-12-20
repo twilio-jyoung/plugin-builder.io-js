@@ -5,6 +5,10 @@ import { Button } from "@twilio-paste/core/button";
 import { getLocalStorageValue, setLocalStorageValue } from "../../utils/localStorage";
 import { Actions } from "@twilio/flex-ui";
 
+const getCurrentConfig = (value, defaultValue) => {
+	let return_value = getLocalStorageValue(value) || defaultValue;
+};
+
 const handleSubmit = (event) => {
 	event.preventDefault();
 
@@ -25,17 +29,12 @@ const handleCancel = (event) => {
 };
 
 const ConfigurationView = () => {
-	let environmentKeyDefaultValue = getLocalStorageValue("builderEnvironmentKey");
+	let environmentKeyDefaultValue =
+		getLocalStorageValue("builderEnvironmentKey") || process.env.FLEX_BUILDERIO_API_KEY;
 
-	if (!environmentKeyDefaultValue) {
-		environmentKeyDefaultValue = process.env.FLEX_BUILDERIO_API_KEY;
-	}
-
-	let modelUniqueIdentifierDefaultValue = getLocalStorageValue("builderModelUniqueIdentifier");
-
-	if (!modelUniqueIdentifierDefaultValue) {
-		modelUniqueIdentifierDefaultValue = process.env.FLEX_BUILDERIO_MODEL_UNIQUE_IDENTIFIER;
-	}
+	let modelUniqueIdentifierDefaultValue =
+		getLocalStorageValue("builderModelUniqueIdentifier") ||
+		process.env.FLEX_BUILDERIO_MODEL_UNIQUE_IDENTIFIER;
 
 	return (
 		<div style={{ margin: 20, minWidth: 300 }}>

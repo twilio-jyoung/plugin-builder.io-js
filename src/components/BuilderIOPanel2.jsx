@@ -19,7 +19,7 @@ const BuilderIOPanel2 = (props) => {
 		let builderModelUniqueIdentifier = getLocalStorageValue("builderModelUniqueIdentifier");
 
 		if (!builderModelUniqueIdentifier) {
-			builderEnvironmentKey = process.env.FLEX_BUILDERIO_MODEL_UNIQUE_IDENTIFIER;
+			builderModelUniqueIdentifier = process.env.FLEX_BUILDERIO_MODEL_UNIQUE_IDENTIFIER;
 		}
 
 		builder
